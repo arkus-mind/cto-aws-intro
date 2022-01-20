@@ -6,6 +6,9 @@
 - [System design interview](https://www.amazon.com/System-Design-Interview-insiders-Second-dp-B08CMF2CQF/dp/B08CMF2CQF/ref=mt_other?_encoding=UTF8&me=&qid=1642666962)
 - [Cloudguru](https://acloudguru.com/)
 
+## References Video
+- [Video course 2](https://drive.google.com/file/d/1iUirIzM18nBsoCjiJ6vJmLdWv2qtttzf/view?usp=sharing)
+
 ### Cache
 - Elastic Cache (Memcached, Redis)
 
