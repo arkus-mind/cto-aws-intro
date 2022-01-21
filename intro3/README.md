@@ -11,11 +11,11 @@
 - [Video course 5](https://drive.google.com/file/d/14CT_v5AAUUTpPTTtRNUs4VJEwLoLVVzW/view?usp=sharing)
 
 ### Logging
-- Elastic Cache (Memcached, Redis)
+-  **AWS Cloudwatch**
+-  AWS X-Ray
 
 
 ### Metrics
-- **AWS Cloudwatch**
 - AWS OpenSearch
 - AWS Managed Service for Grafana
 - AWS Managed Service for Prometheus
@@ -29,7 +29,7 @@
 - Infrastructure as code
 - **AWS Cloudformation**
 - **AWS CDK, Terraform, Serverless**
-- **Build System (github, gitlab, Azure Devops, Jenkins)**
+- **Build System (github**, **gitlab**, Azure Devops, Jenkins)**
 - Continuos Integration
 - Continuos Delivery
 - Continuos Deployment
