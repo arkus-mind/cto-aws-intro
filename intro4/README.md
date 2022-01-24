@@ -9,6 +9,10 @@
 - [Bret Fisher Youtube Channel](https://www.youtube.com/channel/UC0NErq0RhP51iXx64ZmyVfg)
 - [Kubernetes](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
 
+## References Video
+- [Video course 6](https://drive.google.com/file/d/1lVQA3WC-MeGr6Z15sS6iDKX1RTRfo-h5/view?usp=sharing)
+- [Video course 7](https://drive.google.com/file/d/1P1G_QsL3c4ujrLUCXCn_-aU_1bsYW6MT/view?usp=sharing)
+
 ### Serverless and Container Orchestration
 - **Docker
 - **AWS Lambda
