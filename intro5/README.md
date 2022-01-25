@@ -4,8 +4,8 @@
 Crear una api para un ToDo en go, donde pueda listar mis tareas, actualizar, crear y borrar, las tareas deben de guardar un titulo, una descripcion, una fecha de creacion, una fecha de actualizacion y un status, los status son En Progreso, Terminado y Por Trabajar, al crear una tarea se crea por default en Por Trabajar
 
 ## Condiciones
-- API Gateway Proxy
-- Lambda Function
+- Un solo API Gateway Proxy
+- Una sola Lambda Function
 - RDS Aurora Postgresql
 - GO
 - CloudWatch
