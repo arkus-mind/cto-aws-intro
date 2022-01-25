@@ -17,3 +17,4 @@ Crear una api para un ToDo en go, donde pueda listar mis tareas, actualizar, cre
 - Que puedas buscar por ID
 - Que puedas buscar por Titulo
 - Usar Docker para la lambda function
+- Separation of concerns (controller, service, repository)
