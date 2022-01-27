@@ -20,7 +20,8 @@ payload="{
 curl --data "$payload" 'https://h53fah3ii9.execute-api.us-east-1.amazonaws.com/default'
 
 payload="{
-  \"command\" : \"search\"
+  \"command\" : \"search\",
+  \"term\"    : \"robo\"
 }"
 curl --data "$payload" 'https://h53fah3ii9.execute-api.us-east-1.amazonaws.com/default'
 

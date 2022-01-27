@@ -1,0 +1,8 @@
+{
+  "dbusername" : "",
+  "dbpassword" : "",
+  "dbhostname" : "",
+  "dbschema"   : "",
+  "redishost"  : "",
+  "serverbase" : ""
+}
