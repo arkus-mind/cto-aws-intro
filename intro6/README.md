@@ -1,20 +1,20 @@
 # Cloud Computing y AWS
-### Crear un api en aws
+### Actividad Diaria 1
 
-Crear una api para un ToDo en go, donde pueda listar mis tareas, actualizar, crear y borrar, las tareas deben de guardar un titulo, una descripcion, una fecha de creacion, una fecha de actualizacion y un status, los status son En Progreso, Terminado y Por Trabajar, al crear una tarea se crea por default en Por Trabajar
+Crear una EC2 Instance con un proyecto que se pueda conectar a una base de datos de RDS Aurora Postgresql
 
 ## Condiciones
-- Un solo API Gateway Proxy
-- Una sola Lambda Function
-- RDS Aurora Postgresql
-- GO
-- CloudWatch
+- EC2: debe tener una ip publica elastica asociada a la instancia
+- EC2: debes de poder conectarte con tu certificado al ssh y solamente desde tu ip
+- RDS: debes poderte contectar publicamente a la instancia de base de datos desde tu compu personal y solo desde tu ip
+- EC2: la ip publica asociada debe de desplegar informacion que se encuentre en la base de datos de RDS
 
-## Extra
-- Usar AWS CDK
-- Usar Auth para el API
-- Validacion de campos requeridos (Titulo)
-- Que puedas buscar por ID
-- Que puedas buscar por Titulo
-- Usar Docker para la lambda function
-- Separation of concerns (controller, service, repository)
+
+## Investigacion
+- Cuales son los tipos de instancias
+- Cual es el pricing de las diferentes tipos de instancias
+- Diferencias entre instancias reserved, spot y dedicated
+- Que harias si pierdes tu certificado de una instancia y necesitas conectarte a dicha instancia
+- Cual es la diferencia entre usar RDS Aurora y RDS
+- Cual es el pricing de las instancias de RDS
+- Que harias si tu base de datos se corrompe y necesitas recuperar los datos de un dia anterior 
