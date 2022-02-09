@@ -31,15 +31,15 @@ func (f *CryptoFilter) List (from_datetime string, to_datetime string ,
     err = errors.New("Invalid datetime format use yyyy-mm-dd hh:MM:ss")
     return
   }
-  rows,err:=f.db.Query("SELECT mexican_peso::text, hk_dollar::text, usd_dollar::text FROM btc_loco.btc_loco"+
+  rows,err:=f.db.Query("SELECT mexican_peso::text, hk_dollar::text, usd_dollar::text,created_at::text FROM btc_loco.btc_loco"+
              " WHERE created_at >=$1 AND created_at <=$2",&from_datetime,&to_datetime) 
   if err != nil{
     return
   }
   for rows.Next(){
     n:=make(map[string] string)
-    var mx,usd,hk string 
-    rows.Scan(&mx,&usd,&hk)
+    var mx,usd,hk,created_at string 
+    rows.Scan(&mx,&usd,&hk,&created_at)
     if use_mx {
       n["mx"]=mx
     }
@@ -49,6 +49,7 @@ func (f *CryptoFilter) List (from_datetime string, to_datetime string ,
     if use_hk{
       n["hk"]=hk
     }
+    n["created_at"]=created_at
     ret=append(ret,n)
   }
   return
