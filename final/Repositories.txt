@@ -1,0 +1,8 @@
+Bitso Register:
+https://github.com/JorgeAdd/BitsoRegisterGo.git
+
+Lambda Dynamo to RDS:
+https://github.com/JorgeAdd/LambdaDynamoToRDS.git
+
+Lambda API-Gateway:
+https://github.com/JorgeAdd/go-final-skills-cto.git
