@@ -90,7 +90,7 @@ func (ur *currencyRepository) GetCurrenciesByType(filter string) ([]models.Curre
 			currency.Ask = currency.Ask / currency.USDToMXN
 			currency.Bid = currency.Bid / currency.USDToMXN
 			currency.Change_24 = currency.Change_24 / currency.USDToMXN
-		} else if filter == "HDk" {
+		} else if filter == "HDK" {
 			currency.Volume = currency.Volume / currency.HKDToMXN
 			currency.High = currency.High / currency.HKDToMXN
 			currency.Last = currency.Last / currency.HKDToMXN
@@ -132,7 +132,7 @@ func (ur *currencyRepository) GetCurrenciesByAllParams(dateIni string, dateEnd s
 			currency.Ask = currency.Ask / currency.USDToMXN
 			currency.Bid = currency.Bid / currency.USDToMXN
 			currency.Change_24 = currency.Change_24 / currency.USDToMXN
-		} else if filter == "HDk" {
+		} else if filter == "HDK" {
 			currency.Volume = currency.Volume / currency.HKDToMXN
 			currency.High = currency.High / currency.HKDToMXN
 			currency.Last = currency.Last / currency.HKDToMXN

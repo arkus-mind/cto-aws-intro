@@ -16,29 +16,20 @@ import (
 // WrapEchoServer wraps echo server into Lambda Handler
 func WrapRouter(e *echo.Echo) func(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	return func(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-		var response = models.ResponseCurrencies{}
 		body := strings.NewReader(request.Body)
 		dataRequest := models.RequestCurrency{}
 		err := json.NewDecoder(body).Decode(&dataRequest)
 		//TODO: Check how to use Validate from APIGatewayProxyRequest and/or how check the correct params
 		if err != nil {
-			response.Success = false
 			var errors []string
-			response.Message = "Wrong parameters"
 			errors = append(errors, "Provide the necessary parameters, dateInit, dateEnd in format YYYY-MM-DD and currency (USD,HKD and MXN)")
-			response.Errors = errors
-			jsonData, _ := json.Marshal(response)
-			return formatAPIErrorResponse(http.StatusBadRequest, httptest.NewRecorder().Header(), string(jsonData))
+			return formatAPIErrorResponse(http.StatusBadRequest, httptest.NewRecorder().Header(), "Wrong parameters", errors)
 		}
 
 		m := validateParams(dataRequest)
 
 		if len(m) > 0 {
-			response.Success = false
-			response.Message = "Wrong parameters"
-			response.Errors = m
-			jsonData, _ := json.Marshal(response)
-			return formatAPIErrorResponse(http.StatusBadRequest, httptest.NewRecorder().Header(), string(jsonData))
+			return formatAPIErrorResponse(http.StatusBadRequest, httptest.NewRecorder().Header(), "Wrong parameters", m)
 		}
 		tr := repository.NewCurrencyRepository()
 		//Alls
@@ -65,7 +56,7 @@ func WrapRouter(e *echo.Echo) func(ctx context.Context, request events.APIGatewa
 			return formatAPIResponse(http.StatusOK, httptest.NewRecorder().Header(), currencies, msg)
 		}
 
-		return formatAPIErrorResponse(http.StatusBadRequest, httptest.NewRecorder().Header(), "Currency information not found")
+		return formatAPIErrorResponse(http.StatusBadRequest, httptest.NewRecorder().Header(), "Currency information not found", []string{})
 	}
 }
 
@@ -95,10 +86,10 @@ func formatAPIResponse(statusCode int, headers http.Header, currencies []models.
 			StatusCode: statusCode,
 		}, nil
 	}
-	return formatAPIErrorResponse(http.StatusBadRequest, headers, "Currency information not found")
+	return formatAPIErrorResponse(http.StatusBadRequest, headers, "Currency information not found", []string{})
 }
 
-func formatAPIErrorResponse(statusCode int, headers http.Header, err string) (events.APIGatewayProxyResponse, error) {
+func formatAPIErrorResponse(statusCode int, headers http.Header, err string, errors []string) (events.APIGatewayProxyResponse, error) {
 	responseHeaders := make(map[string]string)
 
 	responseHeaders["Content-Type"] = "application/json"
@@ -115,6 +106,7 @@ func formatAPIErrorResponse(statusCode int, headers http.Header, err string) (ev
 	var response = models.ResponseCurrencies{}
 	response.Success = false
 	response.Message = err
+	response.Errors = errors
 	jsonData, _ := json.Marshal(response)
 	return events.APIGatewayProxyResponse{
 		Body:       string(jsonData),
