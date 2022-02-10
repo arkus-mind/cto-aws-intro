@@ -19,6 +19,29 @@ type CurrencyRepository interface {
 	CloseConnection() bool
 }
 
+func convertData(filter string, item models.Currency) models.Currency {
+	if filter == "USD" {
+		item.Volume = item.Volume / item.USDToMXN
+		item.High = item.High / item.USDToMXN
+		item.Last = item.Last / item.USDToMXN
+		item.Low = item.Low / item.USDToMXN
+		item.Vwap = item.Vwap / item.USDToMXN
+		item.Ask = item.Ask / item.USDToMXN
+		item.Bid = item.Bid / item.USDToMXN
+		item.Change_24 = item.Change_24 / item.USDToMXN
+	} else if filter == "HDK" {
+		item.Volume = item.Volume / item.HKDToMXN
+		item.High = item.High / item.HKDToMXN
+		item.Last = item.Last / item.HKDToMXN
+		item.Low = item.Low / item.HKDToMXN
+		item.Vwap = item.Vwap / item.HKDToMXN
+		item.Ask = item.Ask / item.HKDToMXN
+		item.Bid = item.Bid / item.HKDToMXN
+		item.Change_24 = item.Change_24 / item.HKDToMXN
+	}
+	return item
+}
+
 func (ur *currencyRepository) NewCurrency(currency models.Currency) string {
 	//TODO: validate the new schedule not exist into data base.
 	// close database
@@ -81,26 +104,8 @@ func (ur *currencyRepository) GetCurrenciesByType(filter string) ([]models.Curre
 		// unmarshal the row object to user
 		err = rows.Scan(&currency.Id, &currency.IdCrypto, &currency.CreatedAt, &currency.Book, &currency.Volume, &currency.High, &currency.Last, &currency.Low, &currency.Vwap, &currency.Ask, &currency.Bid, &currency.Change_24, &currency.USDToMXN, &currency.HKDToMXN)
 		CheckError(err)
-		if filter == "USD" {
-			currency.Volume = currency.Volume / currency.USDToMXN
-			currency.High = currency.High / currency.USDToMXN
-			currency.Last = currency.Last / currency.USDToMXN
-			currency.Low = currency.Low / currency.USDToMXN
-			currency.Vwap = currency.Vwap / currency.USDToMXN
-			currency.Ask = currency.Ask / currency.USDToMXN
-			currency.Bid = currency.Bid / currency.USDToMXN
-			currency.Change_24 = currency.Change_24 / currency.USDToMXN
-		} else if filter == "HDK" {
-			currency.Volume = currency.Volume / currency.HKDToMXN
-			currency.High = currency.High / currency.HKDToMXN
-			currency.Last = currency.Last / currency.HKDToMXN
-			currency.Low = currency.Low / currency.HKDToMXN
-			currency.Vwap = currency.Vwap / currency.HKDToMXN
-			currency.Ask = currency.Ask / currency.HKDToMXN
-			currency.Bid = currency.Bid / currency.HKDToMXN
-			currency.Change_24 = currency.Change_24 / currency.HKDToMXN
-		}
-		currencies = append(currencies, currency)
+
+		currencies = append(currencies, convertData(filter, currency))
 	}
 	return currencies, err
 }
@@ -123,27 +128,7 @@ func (ur *currencyRepository) GetCurrenciesByAllParams(dateIni string, dateEnd s
 		err = rows.Scan(&currency.Id, &currency.IdCrypto, &currency.CreatedAt, &currency.Book, &currency.Volume, &currency.High, &currency.Last, &currency.Low, &currency.Vwap, &currency.Ask, &currency.Bid, &currency.Change_24, &currency.USDToMXN, &currency.HKDToMXN)
 		CheckError(err)
 
-		if filter == "USD" {
-			currency.Volume = currency.Volume / currency.USDToMXN
-			currency.High = currency.High / currency.USDToMXN
-			currency.Last = currency.Last / currency.USDToMXN
-			currency.Low = currency.Low / currency.USDToMXN
-			currency.Vwap = currency.Vwap / currency.USDToMXN
-			currency.Ask = currency.Ask / currency.USDToMXN
-			currency.Bid = currency.Bid / currency.USDToMXN
-			currency.Change_24 = currency.Change_24 / currency.USDToMXN
-		} else if filter == "HDK" {
-			currency.Volume = currency.Volume / currency.HKDToMXN
-			currency.High = currency.High / currency.HKDToMXN
-			currency.Last = currency.Last / currency.HKDToMXN
-			currency.Low = currency.Low / currency.HKDToMXN
-			currency.Vwap = currency.Vwap / currency.HKDToMXN
-			currency.Ask = currency.Ask / currency.HKDToMXN
-			currency.Bid = currency.Bid / currency.HKDToMXN
-			currency.Change_24 = currency.Change_24 / currency.HKDToMXN
-		}
-
-		currencies = append(currencies, currency)
+		currencies = append(currencies, convertData(filter, currency))
 	}
 	return currencies, err
 }
